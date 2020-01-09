@@ -1,0 +1,153 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<LINK rel="Bookmark" href="/favicon.ico" >
+<LINK rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="hui/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="hui/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="hui/lib/Hui-iconfont/1.0.7/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="hui/lib/icheck/icheck.css" />
+<link rel="stylesheet" type="text/css" href="hui/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="hui/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>首页Banner图片</title>
+	<style>
+		.upload-iput img{
+			width:200px;
+			height:100px;
+		}
+		.address-input{
+			font-size:18px;
+		}
+	</style>
+</head>
+<body>
+<article class="page-container">
+	
+		<section class="pic1">
+		<form class="form form-horizontal" id="" enctype="multipart/form-data">
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>图片1：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<div class="upload-iput">
+					<img alt="" src=""  id="banner1_Pre" >
+					<input  style="margin-top:66px;margin-left:20px" type="button" id="banner1_delete" multiple  class="btn radius"  value="删除">
+					<span class="btn-upload form-group" style="margin-top:66px;margin-left:10px">
+					    <a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i>上传图片</a>
+						<input type="file" id="banner1" multiple name="banner" class="input-file"  onchange="change(this)">
+					</span>
+					</div>				
+				</div>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>链接地址：</label>
+				<div class="formControls col-xs-8 col-sm-9 mt-10">
+				<input type="text" class="input-text" value="" placeholder="" id="banner1_url" name="">
+				</div>
+			</div>	
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>图片2：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<div class="upload-iput">
+					<img alt="" src="" id="banner2_Pre" >
+					<input  style="margin-top:66px;margin-left:20px" type="button" id="banner2_delete" multiple  class="btn radius"  value="删除">
+					<span class="btn-upload form-group" style="margin-top:66px;margin-left:10px">
+					    <a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i>上传图片</a>
+						<input type="file" id="banner2" multiple name="banner" class="input-file"  onchange="change(this)">
+					</span>
+					</div>				
+				</div>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>链接地址：</label>
+				<div class="formControls col-xs-8 col-sm-9 mt-10">
+				<input type="text" class="input-text" value="" placeholder="" id="banner2_url" name="url">
+				</div>
+			</div>	
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>图片3：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<div class="upload-iput">
+					<img alt="" src="" id="banner3_Pre" >
+					<input  style="margin-top:66px;margin-left:20px" type="button" id="banner3_delete" multiple  class="btn radius"  value="删除">
+					<span class="btn-upload form-group" style="margin-top:66px;margin-left:10px">
+					    <a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i>上传图片</a>
+						<input type="file" id="banner3" multiple name="banner" class="input-file"  onchange="change(this)">
+					</span>
+					</div>				
+				</div>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>链接地址：</label>
+				<div class="formControls col-xs-8 col-sm-9 mt-10">
+				<input type="text" class="input-text" value="" placeholder="" id="banner3_url" name="url">
+				</div>
+			</div>	
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>图片4：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<div class="upload-iput">
+					<img alt="" src="" id="banner4_Pre" >
+					<input  style="margin-top:66px;margin-left:20px" type="button" id="banner4_delete" multiple  class="btn radius"  value="删除">
+					<span class="btn-upload form-group" style="margin-top:66px;margin-left:10px">
+					    <a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i>上传图片</a>
+						<input type="file" id="banner4" multiple name="banner" class="input-file"  onchange="change(this)">
+					</span>
+					</div>				
+				</div>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>链接地址：</label>
+				<div class="formControls col-xs-8 col-sm-9 mt-10">
+				<input type="text" class="input-text" value="" placeholder="" id="banner4_url" name="">
+				</div>
+			</div>	
+		
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>图片5：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<div class="upload-iput">
+					<img alt="" src="" id="banner5_Pre" >
+					<input  style="margin-top:66px;margin-left:20px" type="button" id="banner5_delete" multiple  class="btn radius"  value="删除">
+					<span class="btn-upload form-group" style="margin-top:66px;margin-left:10px">
+					    <a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i>上传图片</a>
+						<input type="file" id="banner5" multiple name="banner" class="input-file"  onchange="change(this)">
+					</span>
+					</div>				
+				</div>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>链接地址：</label>
+				<div class="formControls col-xs-8 col-sm-9 mt-10">
+				<input type="text" class="input-text" value="" placeholder="" id="banner5_url" name="url">
+				</div>
+			</div>	
+		</form>	
+		</section>	
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2 mt-20">
+				<button id="save-btn" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>				
+				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	
+</article>
+
+
+<script type="text/javascript" src="hui/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="hui/lib/layer/2.1/layer.js"></script> 
+<script type="text/javascript" src="hui/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script> 
+<script type="text/javascript" src="hui/static/h-ui/js/H-ui.js"></script> 
+<script type="text/javascript" src="hui/static/h-ui.admin/js/H-ui.admin.js"></script> 
+
+<script type="text/javascript" src="common/filterAjax.js"></script> 
+<script type="text/javascript" src="common/owl.js"></script> 
+<script type="text/javascript" src="banner-pic.js"></script>
+
+
+</body>
+</html>

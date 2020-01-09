@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoyuan.manage.web.dao.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaoyuan.manage.web.entity.Message" >
+    <id column="n_message_id" property="nMessageId" jdbcType="BIGINT" />
+    <result column="c_from" property="from" jdbcType="VARCHAR" />
+    <result column="msg_id" property="msgId" jdbcType="VARCHAR" />
+    <result column="chat_type" property="chatType" jdbcType="VARCHAR" />
+    <result column="msg" property="msg" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="length" property="length" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="secret" property="secret" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="REAL" />
+    <result column="lng" property="lng" jdbcType="REAL" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="timestamp" property="timestamp" jdbcType="TIMESTAMP" />
+    <result column="c_to" property="to" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    n_message_id, c_from, msg_id, chat_type, msg, type, length, url, filename, secret, 
+    lat, lng, addr, timestamp, c_to
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_message
+    where n_message_id = #{nMessageId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_message
+    where n_message_id = #{nMessageId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiaoyuan.manage.web.entity.Message" >
+    insert into t_message (n_message_id, c_from, msg_id, 
+      chat_type, msg, type, 
+      length, url, filename, 
+      secret, lat, lng, addr, 
+      timestamp, c_to)
+    values (#{nMessageId,jdbcType=BIGINT}, #{from,jdbcType=VARCHAR}, #{msgId,jdbcType=VARCHAR}, 
+      #{chatType,jdbcType=VARCHAR}, #{msg,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{length,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, 
+      #{secret,jdbcType=VARCHAR}, #{lat,jdbcType=REAL}, #{lng,jdbcType=REAL}, #{addr,jdbcType=VARCHAR}, 
+      #{timestamp,jdbcType=TIMESTAMP}, #{to,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaoyuan.manage.web.entity.Message" >
+    insert into t_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nMessageId != null" >
+        n_message_id,
+      </if>
+      <if test="from != null" >
+        c_from,
+      </if>
+      <if test="msgId != null" >
+        msg_id,
+      </if>
+      <if test="chatType != null" >
+        chat_type,
+      </if>
+      <if test="msg != null" >
+        msg,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="secret != null" >
+        secret,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="lng != null" >
+        lng,
+      </if>
+      <if test="addr != null" >
+        addr,
+      </if>
+      <if test="timestamp != null" >
+        timestamp,
+      </if>
+      <if test="to != null" >
+        c_to,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nMessageId != null" >
+        #{nMessageId,jdbcType=BIGINT},
+      </if>
+      <if test="from != null" >
+        #{from,jdbcType=VARCHAR},
+      </if>
+      <if test="msgId != null" >
+        #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="chatType != null" >
+        #{chatType,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="secret != null" >
+        #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=REAL},
+      </if>
+      <if test="lng != null" >
+        #{lng,jdbcType=REAL},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="to != null" >
+        #{to,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaoyuan.manage.web.entity.Message" >
+    update t_message
+    <set >
+      <if test="from != null" >
+        c_from = #{from,jdbcType=VARCHAR},
+      </if>
+      <if test="msgId != null" >
+        msg_id = #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="chatType != null" >
+        chat_type = #{chatType,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="secret != null" >
+        secret = #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=REAL},
+      </if>
+      <if test="lng != null" >
+        lng = #{lng,jdbcType=REAL},
+      </if>
+      <if test="addr != null" >
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="to != null" >
+        c_to = #{to,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where n_message_id = #{nMessageId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaoyuan.manage.web.entity.Message" >
+    update t_message
+    set c_from = #{from,jdbcType=VARCHAR},
+      msg_id = #{msgId,jdbcType=VARCHAR},
+      chat_type = #{chatType,jdbcType=VARCHAR},
+      msg = #{msg,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      length = #{length,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR},
+      secret = #{secret,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=REAL},
+      lng = #{lng,jdbcType=REAL},
+      addr = #{addr,jdbcType=VARCHAR},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      c_to = #{to,jdbcType=VARCHAR}
+    where n_message_id = #{nMessageId,jdbcType=BIGINT}
+  </update>
+</mapper>

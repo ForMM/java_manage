@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoyuan.manage.web.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaoyuan.manage.web.entity.Comment" >
+    <id column="n_comment_id" property="nCommentId" jdbcType="BIGINT" />
+    <result column="c_comment_content" property="cCommentContent" jdbcType="VARCHAR" />
+    <result column="n_comment_type" property="nCommentType" jdbcType="BIT" />
+    <result column="n_target_id" property="nTargetId" jdbcType="BIGINT" />
+    <result column="n_user_id" property="nUserId" jdbcType="BIGINT" />
+    <result column="t_create_time" property="tCreateTime" jdbcType="TIMESTAMP" />
+    <result column="n_status" property="nStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    n_comment_id, c_comment_content, n_comment_type, n_target_id, n_user_id, t_create_time, 
+    n_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_comment
+    where n_comment_id = #{nCommentId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_comment
+    where n_comment_id = #{nCommentId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiaoyuan.manage.web.entity.Comment" >
+    insert into t_comment (n_comment_id, c_comment_content, n_comment_type, 
+      n_target_id, n_user_id, t_create_time, 
+      n_status)
+    values (#{nCommentId,jdbcType=BIGINT}, #{cCommentContent,jdbcType=VARCHAR}, #{nCommentType,jdbcType=BIT}, 
+      #{nTargetId,jdbcType=BIGINT}, #{nUserId,jdbcType=BIGINT}, #{tCreateTime,jdbcType=TIMESTAMP}, 
+      #{nStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaoyuan.manage.web.entity.Comment" >
+    insert into t_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nCommentId != null" >
+        n_comment_id,
+      </if>
+      <if test="cCommentContent != null" >
+        c_comment_content,
+      </if>
+      <if test="nCommentType != null" >
+        n_comment_type,
+      </if>
+      <if test="nTargetId != null" >
+        n_target_id,
+      </if>
+      <if test="nUserId != null" >
+        n_user_id,
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time,
+      </if>
+      <if test="nStatus != null" >
+        n_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nCommentId != null" >
+        #{nCommentId,jdbcType=BIGINT},
+      </if>
+      <if test="cCommentContent != null" >
+        #{cCommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="nCommentType != null" >
+        #{nCommentType,jdbcType=BIT},
+      </if>
+      <if test="nTargetId != null" >
+        #{nTargetId,jdbcType=BIGINT},
+      </if>
+      <if test="nUserId != null" >
+        #{nUserId,jdbcType=BIGINT},
+      </if>
+      <if test="tCreateTime != null" >
+        #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nStatus != null" >
+        #{nStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaoyuan.manage.web.entity.Comment" >
+    update t_comment
+    <set >
+      <if test="cCommentContent != null" >
+        c_comment_content = #{cCommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="nCommentType != null" >
+        n_comment_type = #{nCommentType,jdbcType=BIT},
+      </if>
+      <if test="nTargetId != null" >
+        n_target_id = #{nTargetId,jdbcType=BIGINT},
+      </if>
+      <if test="nUserId != null" >
+        n_user_id = #{nUserId,jdbcType=BIGINT},
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nStatus != null" >
+        n_status = #{nStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where n_comment_id = #{nCommentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaoyuan.manage.web.entity.Comment" >
+    update t_comment
+    set c_comment_content = #{cCommentContent,jdbcType=VARCHAR},
+      n_comment_type = #{nCommentType,jdbcType=BIT},
+      n_target_id = #{nTargetId,jdbcType=BIGINT},
+      n_user_id = #{nUserId,jdbcType=BIGINT},
+      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      n_status = #{nStatus,jdbcType=TINYINT}
+    where n_comment_id = #{nCommentId,jdbcType=BIGINT}
+  </update>
+  
+  <select id="findByParam" resultMap="BaseResultMap">
+  select * from t_comment
+  <where>
+  n_status=1
+  <if test="targetId!=null">
+   and n_target_id = #{targetId,jdbcType=BIGINT}
+  </if>
+  <if test="commentType!=null">
+   and n_comment_type = #{commentType,jdbcType=BIGINT}
+  </if>
+  </where>
+  order by t_create_time desc
+  <if test="startRow!=null">
+  limit #{startRow},#{pageSize}
+  </if>
+  </select>
+  
+   <select id="countByParam" resultType="java.lang.Integer">
+  select count(*) from t_comment
+  <where>
+  n_status=1
+  <if test="targetId!=null">
+   and n_target_id = #{targetId,jdbcType=BIGINT}
+  </if>
+  <if test="commentType!=null">
+   and n_comment_type = #{commentType,jdbcType=BIGINT}
+  </if>
+  </where>
+  </select>
+  
+  
+   <select id="findCommentList"  resultMap="BaseResultMap">
+ 	 SELECT * FROM t_comment
+	  <where>
+	    n_status=1
+	 	  <if test="keywords!=null and keywords!=''">
+	 	  and
+	 	  	(
+    		c_comment_content like CONCAT('%','${keywords}','%' ) 
+   			 )
+	 	  </if>
+	 	   <if test="beginDate!=null and beginDate!=''">
+		  	<![CDATA[
+		      and DATE_FORMAT(t_create_time, '%Y-%m-%d %H:%i:%s') >=  DATE_FORMAT(#{beginDate}, '%Y-%m-%d %H:%i:%s')
+			]]>
+		  </if>
+		  <if test="endDate!=null and endDate!=''">
+		  <![CDATA[
+		      and DATE_FORMAT(t_create_time, '%Y-%m-%d %H:%i:%s') <=  DATE_FORMAT(#{endDate}, '%Y-%m-%d %H:%i:%s')
+			]]>
+		  </if>
+	  </where>
+	   <if test="startRow!=null">
+	   	   limit #{startRow},#{pageSize}
+	     </if>
+ </select>
+  <select id="countCommentList"  resultType="java.lang.Integer">
+ 	 SELECT count(*) FROM t_comment
+	  <where>
+	   n_status=1
+	 	  <if test="keywords!=null and keywords!=''">
+	 	  and
+	 	  	(
+    		c_comment_content like CONCAT('%','${keywords}','%' ) 
+   			 )
+	 	  </if>
+	 	   <if test="beginDate!=null and beginDate!=''">
+		  	<![CDATA[
+		      and DATE_FORMAT(t_create_time, '%Y-%m-%d %H:%i:%s') >=  DATE_FORMAT(#{beginDate}, '%Y-%m-%d %H:%i:%s')
+			]]>
+		  </if>
+		  <if test="endDate!=null and endDate!=''">
+		  <![CDATA[
+		      and DATE_FORMAT(t_create_time, '%Y-%m-%d %H:%i:%s') <=  DATE_FORMAT(#{endDate}, '%Y-%m-%d %H:%i:%s')
+			]]>
+		  </if>
+	  </where>
+ </select>
+  
+  
+  
+</mapper>

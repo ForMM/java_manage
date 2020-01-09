@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoyuan.manage.web.dao.OwlSensitiveWordMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaoyuan.manage.web.entity.OwlSensitiveWord" >
+    <id column="n_sensitive_id" property="nSensitiveId" jdbcType="BIGINT" />
+    <result column="c_word" property="cWord" jdbcType="VARCHAR" />
+    <result column="t_create_time" property="tCreateTime" jdbcType="TIMESTAMP" />
+    <result column="t_update_time" property="tUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="n_create_id" property="nCreateId" jdbcType="BIGINT" />
+    <result column="n_update_id" property="nUpdateId" jdbcType="BIGINT" />
+    <result column="n_status" property="nStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    n_sensitive_id, c_word, t_create_time, t_update_time, n_create_id, n_update_id, n_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sensitive_word
+    where n_sensitive_id = #{nSensitiveId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_sensitive_word
+    where n_sensitive_id = #{nSensitiveId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiaoyuan.manage.web.entity.OwlSensitiveWord" >
+    insert into t_sensitive_word (n_sensitive_id, c_word, t_create_time, 
+      t_update_time, n_create_id, n_update_id, 
+      n_status)
+    values (#{nSensitiveId,jdbcType=BIGINT}, #{cWord,jdbcType=VARCHAR}, #{tCreateTime,jdbcType=TIMESTAMP}, 
+      #{tUpdateTime,jdbcType=TIMESTAMP}, #{nCreateId,jdbcType=BIGINT}, #{nUpdateId,jdbcType=BIGINT}, 
+      #{nStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaoyuan.manage.web.entity.OwlSensitiveWord" >
+    insert into t_sensitive_word
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nSensitiveId != null" >
+        n_sensitive_id,
+      </if>
+      <if test="cWord != null" >
+        c_word,
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time,
+      </if>
+      <if test="tUpdateTime != null" >
+        t_update_time,
+      </if>
+      <if test="nCreateId != null" >
+        n_create_id,
+      </if>
+      <if test="nUpdateId != null" >
+        n_update_id,
+      </if>
+      <if test="nStatus != null" >
+        n_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nSensitiveId != null" >
+        #{nSensitiveId,jdbcType=BIGINT},
+      </if>
+      <if test="cWord != null" >
+        #{cWord,jdbcType=VARCHAR},
+      </if>
+      <if test="tCreateTime != null" >
+        #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUpdateTime != null" >
+        #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nCreateId != null" >
+        #{nCreateId,jdbcType=BIGINT},
+      </if>
+      <if test="nUpdateId != null" >
+        #{nUpdateId,jdbcType=BIGINT},
+      </if>
+      <if test="nStatus != null" >
+        #{nStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaoyuan.manage.web.entity.OwlSensitiveWord" >
+    update t_sensitive_word
+    <set >
+      <if test="cWord != null" >
+        c_word = #{cWord,jdbcType=VARCHAR},
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUpdateTime != null" >
+        t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nCreateId != null" >
+        n_create_id = #{nCreateId,jdbcType=BIGINT},
+      </if>
+      <if test="nUpdateId != null" >
+        n_update_id = #{nUpdateId,jdbcType=BIGINT},
+      </if>
+      <if test="nStatus != null" >
+        n_status = #{nStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where n_sensitive_id = #{nSensitiveId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaoyuan.manage.web.entity.OwlSensitiveWord" >
+    update t_sensitive_word
+    set c_word = #{cWord,jdbcType=VARCHAR},
+      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      n_create_id = #{nCreateId,jdbcType=BIGINT},
+      n_update_id = #{nUpdateId,jdbcType=BIGINT},
+      n_status = #{nStatus,jdbcType=TINYINT}
+    where n_sensitive_id = #{nSensitiveId,jdbcType=BIGINT}
+  </update>
+
+    <select id="findByParam" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sensitive_word
+    <where>  
+     <if test="word != null" >
+       and c_word=#{word}
+     </if>  
+      <if test="searchword != null" >
+       and c_word like CONCAT('%',#{searchword},'%')
+     </if> 
+       and n_status=1        
+    </where>
+    <if test="orderBy!=null and orderBy!=''">
+    ${orderBy}
+    </if>
+	<if test="startRow!=null">
+    limit #{startRow},#{pageSize}
+    </if>
+  
+  </select>
+   <select id="countByParam" resultType="java.lang.Integer" parameterType="java.util.Map">
+    select 
+    count(*)
+    from t_sensitive_word
+    <where>
+    <if test="word != null" >
+       and c_word=#{word}
+     </if>  
+      <if test="searchword != null" >
+       and c_word like CONCAT('%',#{searchword},'%')
+     </if>  
+      and n_status=1         
+    </where>
+      <if test="orderBy!=null and orderBy!=''">
+    ${orderBy}
+    </if>
+	<if test="startRow!=null">
+    limit #{startRow},#{pageSize}
+    </if>
+   
+  </select>
+  
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoyuan.manage.web.dao.CourseTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaoyuan.manage.web.entity.CourseType" >
+    <id column="n_course_type_id" property="nCourseTypeId" jdbcType="BIGINT" />
+    <result column="c_type_name" property="cTypeName" jdbcType="VARCHAR" />
+    <result column="n_index" property="nIndex" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    n_course_type_id, c_type_name, n_index
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_coursetype
+    where n_course_type_id = #{nCourseTypeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_coursetype
+    where n_course_type_id = #{nCourseTypeId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiaoyuan.manage.web.entity.CourseType" >
+    insert into t_coursetype (n_course_type_id, c_type_name, n_index
+      )
+    values (#{nCourseTypeId,jdbcType=BIGINT}, #{cTypeName,jdbcType=VARCHAR}, #{nIndex,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaoyuan.manage.web.entity.CourseType" >
+    insert into t_coursetype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nCourseTypeId != null" >
+        n_course_type_id,
+      </if>
+      <if test="cTypeName != null" >
+        c_type_name,
+      </if>
+      <if test="nIndex != null" >
+        n_index,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nCourseTypeId != null" >
+        #{nCourseTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="cTypeName != null" >
+        #{cTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nIndex != null" >
+        #{nIndex,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaoyuan.manage.web.entity.CourseType" >
+    update t_coursetype
+    <set >
+      <if test="cTypeName != null" >
+        c_type_name = #{cTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nIndex != null" >
+        n_index = #{nIndex,jdbcType=INTEGER},
+      </if>
+    </set>
+    where n_course_type_id = #{nCourseTypeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaoyuan.manage.web.entity.CourseType" >
+    update t_coursetype
+    set c_type_name = #{cTypeName,jdbcType=VARCHAR},
+      n_index = #{nIndex,jdbcType=INTEGER}
+    where n_course_type_id = #{nCourseTypeId,jdbcType=BIGINT}
+  </update>
+  <select id="findAll" resultMap="BaseResultMap">
+  select * from t_coursetype order by n_index desc
+  </select>
+  
+  
+  
+  <select id="findCourseTypeList"  resultMap="BaseResultMap">
+ 	 SELECT * FROM t_coursetype
+	  <where>
+	 	  <if test="keywords!=null and keywords!=''">
+	 	  and
+	 	  	(
+    		c_type_name like CONCAT('%','${keywords}','%' ) 
+   			 )
+	 	  </if>
+	 	   <if test="beginDate!=null and beginDate!=''">
+		  	<![CDATA[
+		      and DATE_FORMAT(t_create_time, '%Y-%m-%d %H:%i:%s') >=  DATE_FORMAT(#{beginDate}, '%Y-%m-%d %H:%i:%s')
+			]]>
+		  </if>
+		  <if test="endDate!=null and endDate!=''">
+		  <![CDATA[
+		      and DATE_FORMAT(t_create_time, '%Y-%m-%d %H:%i:%s') <=  DATE_FORMAT(#{endDate}, '%Y-%m-%d %H:%i:%s')
+			]]>
+		  </if>
+	  </where>
+	   <if test="startRow!=null">
+	   	   limit #{startRow},#{pageSize}
+	     </if>
+ </select>
+  <select id="countCourseTypeList"  resultType="java.lang.Integer">
+ 	 SELECT count(*) FROM t_coursetype
+	  <where>
+	 	  <if test="keywords!=null and keywords!=''">
+	 	  and
+	 	  	(
+    		c_type_name like CONCAT('%','${keywords}','%' ) 
+   			 )
+	 	  </if>
+	 	   <if test="beginDate!=null and beginDate!=''">
+		  	<![CDATA[
+		      and DATE_FORMAT(t_create_time, '%Y-%m-%d %H:%i:%s') >=  DATE_FORMAT(#{beginDate}, '%Y-%m-%d %H:%i:%s')
+			]]>
+		  </if>
+		  <if test="endDate!=null and endDate!=''">
+		  <![CDATA[
+		      and DATE_FORMAT(t_create_time, '%Y-%m-%d %H:%i:%s') <=  DATE_FORMAT(#{endDate}, '%Y-%m-%d %H:%i:%s')
+			]]>
+		  </if>
+	  </where>
+ </select>
+ 
+ 
+ <select id="maxIndex"  resultType="java.lang.Integer">
+ 	SELECT MAX(n_index) FROM t_coursetype
+ </select>
+  
+</mapper>
